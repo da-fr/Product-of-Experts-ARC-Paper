@@ -1,0 +1,316 @@
+<!-- template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome (Open Source Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- SEO / Social meta -->
+  $if(description)$<meta name="description" content="$description$">$endif$
+  $if(keywords)$<meta name="keywords" content="$keywords$">$endif$
+  $if(author-meta)$<meta name="author" content="$author-meta$">$endif$
+
+  <!-- OpenGraph / Twitter -->
+  $if(title)$<meta property="og:title" content="$title$">$endif$
+  $if(description)$<meta property="og:description" content="$description$">$endif$
+  $if(hero_image)$<meta property="og:image" content="$hero_image$">$endif$
+  $if(canonical)$<link rel="canonical" href="$canonical$">$endif$
+
+  <title>$title$</title>
+
+  <!-- MIT‑licensed font delivered via MIT‑licensed jsDelivr CDN (Fontsource). -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/figtree@5.0.14/index.min.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS + Typography plugin -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          sans: ['Figtree', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+          serif: ['Figtree', 'Georgia', 'Times New Roman', 'Times', 'serif']
+        },
+        extend: {
+          typography: ({ theme }) => ({
+            DEFAULT: {
+              css: {
+                color: theme('colors.gray.700'),
+                fontFamily: theme('fontFamily.sans').join(','),
+                a: {
+                  color: theme('colors.blue.600'),
+                  textDecoration: 'none',
+                  borderBottom: '1px solid ' + theme('colors.blue.200'),
+                  transition: 'all 0.2s ease',
+                  '&:hover': { 
+                    color: theme('colors.blue.700'),
+                    borderBottomColor: theme('colors.blue.600')
+                  }
+                },
+                h1: {
+                  fontFamily: theme('fontFamily.serif').join(','),
+                  fontWeight: '700',
+                  color: theme('colors.gray.900')
+                },
+                h2: {
+                  fontFamily: theme('fontFamily.serif').join(','),
+                  fontWeight: '700',
+                  color: theme('colors.gray.900'),
+                  marginTop: '2em',
+                  marginBottom: '0.5em',
+                  fontSize: '1.75rem'
+                },
+                h3: {
+                  fontFamily: theme('fontFamily.serif').join(','),
+                  fontWeight: '600',
+                  color: theme('colors.gray.800'),
+                  marginTop: '1.5em',
+                  marginBottom: '0.5em',
+                  fontSize: '1.35rem'
+                },
+                p: { 
+                  marginBottom: '1.25em',
+                  lineHeight: '1.7'
+                },
+                blockquote: {
+                  fontStyle: 'italic',
+                  color: theme('colors.gray.600'),
+                  borderLeftColor: theme('colors.blue.200'),
+                  paddingLeft: '1em',
+                  backgroundColor: theme('colors.gray.50'),
+                  borderRadius: '0.25rem',
+                  margin: '1.5rem 0',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                },
+                'h2#tldr + p': {
+                  position: 'relative',
+                  background: theme('colors.blue.50'),
+                  borderLeft: '3px solid ' + theme('colors.blue.500'),
+                  margin: '0.5rem 0 2.5rem',
+                  padding: '1.75rem 2rem',
+                  fontSize: '0.95rem',
+                  lineHeight: '1.8',
+                  color: theme('colors.gray.700'),
+                  borderRadius: '0.3rem',
+                  boxShadow: '0 2px 5px rgba(0,0,0,0.04)',
+                },
+                'h2#tldr': {
+                  marginBottom: '1.5rem',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  color: theme('colors.white'),
+                  backgroundColor: theme('colors.blue.600'),
+                  display: 'inline-block',
+                  padding: '0.3rem 1rem',
+                  borderRadius: '9999px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                },
+                code: {
+                  backgroundColor: theme('colors.gray.100'),
+                  padding: '0.2em 0.4em',
+                  borderRadius: '0.25em',
+                  fontSize: '0.9em',
+                  border: '1px solid ' + theme('colors.gray.200')
+                },
+                pre: {
+                  backgroundColor: theme('colors.gray.50'),
+                  padding: '1.25em',
+                  borderRadius: '0.5em',
+                  overflowX: 'auto',
+                  color: theme('colors.gray.800'),
+                  border: '1px solid ' + theme('colors.gray.200'),
+                  boxShadow: '0 2px 5px rgba(0,0,0,0.03)'
+                },
+                'pre code': {
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  padding: '0'
+                },
+                'ul > li::marker': { color: theme('colors.blue.500') },
+                'ol > li::marker': { color: theme('colors.gray.600') },
+                strong: { color: theme('colors.gray.900'), fontWeight: '600' },
+                table: {
+                  fontSize: '0.9rem',
+                  width: '100%',
+                  marginTop: '2rem',
+                  marginBottom: '2rem',
+                  borderCollapse: 'separate',
+                  borderSpacing: '0',
+                  boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+                  borderRadius: '0.375rem',
+                  overflow: 'hidden'
+                },
+                'thead th': {
+                  backgroundColor: theme('colors.gray.50'),
+                  borderBottom: '1px solid ' + theme('colors.gray.200')
+                },
+                'tbody tr': {
+                  borderBottom: '1px solid ' + theme('colors.gray.100'),
+                  '&:last-child': { borderBottom: 'none' }
+                }
+              }
+            }
+          })
+        }
+      }
+    }
+  </script>
+  
+  <!-- Copy to clipboard functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const copyButtons = document.querySelectorAll('.copy-button');
+      
+      copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const codeBlock = this.parentElement.nextElementSibling.querySelector('code');
+          const textToCopy = codeBlock.innerText;
+          
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            // Change button text temporarily
+            const originalText = this.innerText;
+            this.innerText = 'Copied!';
+            this.classList.add('copied');
+            
+            setTimeout(() => {
+              this.innerText = originalText;
+              this.classList.remove('copied');
+            }, 2000);
+          });
+        });
+      });
+    });
+  </script>
+  
+  <style>
+    .copy-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e2e8f0;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #4a5568;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    
+    .copy-button:hover {
+      background-color: #f7fafc;
+      border-color: #cbd5e0;
+    }
+    
+    .copy-button.copied {
+      background-color: #e6ffed;
+      border-color: #a3e635;
+      color: #15803d;
+    }
+    
+    .code-block-wrapper {
+      position: relative;
+    }
+  </style>
+  
+  <!-- LiveReload script (will only connect when the LiveReload server is running) -->
+  $if(livereload)$
+  <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':8000/livereload.js?snipver=1"></' + 'script>')
+  </script>
+  $endif$
+</head>
+<body class="text-gray-700 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm py-8 mb-12">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h1 class="text-4xl font-serif font-bold text-gray-900">$title$</h1>
+      $if(subtitle)$<p class="mt-2 text-2xl text-gray-900">$subtitle$</p>$endif$
+
+      <!-- Author list with affiliation superscripts -->
+      <p class="mt-4 text-gray-600 text-lg flex justify-center flex-wrap gap-x-4 gap-y-0.5">
+        $if(authors)$
+          $for(authors)$
+            <span class="whitespace-nowrap">
+              $if(authors.url)$
+                <a href="$authors.url$" class="text-blue-600 hover:underline -mr-1">$authors.name$</a>
+              $else$
+                $authors.name$
+              $endif$
+              $if(authors.affiliations)$<sup>$authors.affiliations$</sup>$endif$
+            </span>$sep$ 
+          $endfor$
+        $elseif(author)$
+          $for(author)$$author$$sep$, $endfor$
+        $endif$
+      </p>
+
+      <!-- Affiliations list -->
+      $if(affiliations)$
+      <div class="mt-2 text-gray-600 text-md flex gap-x-2 justify-center flex-wrap">
+        $for(affiliations)$
+          <span><sup>$affiliations.id$</sup> $affiliations.name$</span>
+        $endfor$
+      </div>
+      $endif$
+
+      $if(links)$
+      <div class="mt-4 flex justify-center flex-wrap gap-3 sm:mx-10 md:mx-18">
+        $for(links)$
+          <a href="$links.url$" class="px-5 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition flex items-center gap-2 shadow-sm">
+            $if(links.emoji)$
+              <span class="text-lg">$links.emoji$</span>
+            $elseif(links.icon)$
+              <i class="fas fa-$links.icon$"></i>
+            $endif$
+            $links.label$
+          </a>
+        $endfor$
+      </div>
+      $endif$
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="mx-auto max-w-3xl px-4 mb-16">
+    <article class="prose prose-lg mx-auto bg-white p-8">
+      $body$
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-6 border-t border-gray-100 shadow-inner">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <div class="mb-2">
+        $if(links)$
+        <div class="flex justify-center flex-wrap gap-2 mb-4">
+          $for(links)$
+            <a href="$links.url$" class="text-gray-500 hover:text-blue-500 transition-colors duration-200 mx-2">
+              $if(links.emoji)$
+                <span class="text-lg relative -top-0.5">$links.emoji$</span>
+              $elseif(links.icon)$
+                <i class="fas fa-$links.icon$"></i>
+              $endif$
+            </a>
+          $endfor$
+        </div>
+        $endif$
+      </div>
+      <div class="text-gray-500 text-sm">
+        &copy; $year$ $owner$.
+        $if(license)$
+          Licensed under <a href="$license_url$" class="text-blue-600 hover:underline transition-colors duration-200">$license$</a>.
+        $endif$
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
