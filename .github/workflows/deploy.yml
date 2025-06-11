@@ -1,9 +1,9 @@
 name: Build and Deploy to GitHub Pages
 
 on:
-  # Trigger the workflow on push to dev branch only
+  # Trigger the workflow on push to doc branch only
   push:
-    branches: [ dev ]
+    branches: [ doc ]
   
   # Allow manual triggering from Actions tab
   workflow_dispatch:
