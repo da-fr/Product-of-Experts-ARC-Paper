@@ -123,24 +123,24 @@ Specifically, our key findings include:
 
 1. **Enhanced Performance through Data Variation**
     - Applying transformations such as rotation, grid transposition, and color substitution significantly boosts LLM performance.
-    - Providing multiple perspectives on tasks helps overcome inherent limitations. This parallels early successes in image classification, where augmenting data through various transformations similarly improved model generalization.
-2. **Efficient Solution Generation**
-    - Standard greedy methods for generating solutions were unreliable, even with adjusted parameters.
-    - Employing a depth-first search guided by the LLM's evaluation of potential paths greatly improved outcomes.
+    - Providing multiple perspectives on tasks helps overcome inherent limitations, like the autoregressive generation process of LLMs.
+2. **Efficient Solution Candidate Generation**
+    - Standard greedy and stochastic sampling methods were unreliable in generating the correct solution, even with adjusted parameters.
+    - Employing a depth-first search guided by the LLM's evaluation of potential paths greatly improved the chance of finding the correct solution.
 3. **Effective Solution Selection**
-    - Combining multiple candidate solutions through ensemble scoring enhances overall accuracy.
-    - A "Product-of-Experts" method, integrating multiple LLM judgments to reinforce confidence, emerged as a powerful and effective approach.
+    - Ensemble scoring across diverse augmentations yields more consistent and reliable evaluations.
+    - Our "Product-of-Experts" method for combining the scores of different augmentations emerged as a powerful and effective approach for selecting the correct solution.
 
 
 ### Key Figures
 The two key plots of our work underline the impact of both contributions in isolation. 
 
 <div class="md:mx-20">
-![**Performance impact of Product of Expert selection**: Accuracy and coverage of different selection methods as a function of the confidence threshold T. The solid black line shows the proportion of tasks where the correct solution is among the generated candidates. The solid colored lines show what percentage of the tasks would be solved using different aggregation methods (top-2 accuracy), while the dotted lines show how this percentage relates to the black line. Our product of probabilities approach performs best among the tested aggregation methods.](images/accuracy_selection_methods.png)
+![**Performance impact of DFS-based sampling**: Number of solutions found by various sampling algorithms as a function of runtime. The different values for each sampling variant are calculated using 1 (identity), 2 (reflections), 4 (rotation), 8 (reflections+rotation) and 16 augmentations. Additionally, colors and the order or examples are randomly permuted in each augmented version of a task. For almost any runtime budget, we find that a DFS variant discovers the most solutions.](images/search_performance_comparison.png)
 </div>
 
 <div class="md:mx-20">
-![**Performance impact of DFS-based sampling**: Number of solutions found by various sampling algorithms as a function of runtime. The different values for each sampling variant are calculated using 1 (identity), 2 (reflections), 4 (rotation), 8 (reflections+rotation) and 16 augmentations. Additionally, colors and the order or examples are randomly permuted in each augmented version of a task. For almost any runtime budget, we find that a DFS variant discovers the most solutions.](images/search_performance_comparison.png)
+![**Performance impact of Product of Expert selection**: Accuracy and coverage of different selection methods as a function of the confidence threshold T. The solid black line shows the proportion of tasks where the correct solution is among the generated candidates. The solid colored lines show what percentage of the tasks would be solved using different aggregation methods (top-2 accuracy), while the dotted lines show how this percentage relates to the black line. Our product of probabilities approach performs best among the tested aggregation methods.](images/accuracy_selection_methods.png)
 </div>
 
 ### Comparative Analysis
