@@ -22,8 +22,11 @@ from trl import DataCollatorForCompletionOnlyLM
 
 # trl version warning
 import trl
-if trl.__version__.startswith('0.15'):
-    assert False, "Do not use this code with trl 0.15.x, as this will shorten all training inputs to 1024 tokens."
+assert not trl.__version__.startswith('0.15'), """
+WARNING: Do not use this code with trl version 0.15.x!
+In combination with unsloth, this will shorten all training inputs
+to 1024 tokens, speeding up training, but severely degrading accuracy. 
+"""
 
 
 class InputMaskingDataCollator(DataCollatorForCompletionOnlyLM):
