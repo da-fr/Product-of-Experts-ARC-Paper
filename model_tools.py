@@ -20,6 +20,12 @@ from tokenizers import Tokenizer
 from trl import DataCollatorForCompletionOnlyLM
 
 
+# trl version warning
+import trl
+if trl.__version__.startswith('0.15'):
+    assert False, "Do not use this code with trl 0.15.x, as this will shorten all training inputs to 1024 tokens."
+
+
 class InputMaskingDataCollator(DataCollatorForCompletionOnlyLM):
     def __init__(self, mask_first_n_examples=0, **kwargs):
         super().__init__(**kwargs)
