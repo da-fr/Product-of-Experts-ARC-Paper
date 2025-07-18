@@ -73,13 +73,7 @@ license: "CC BY-SA 4.0"
 license_url: "https://creativecommons.org/licenses/by-sa/4.0/"
 ---
 
-<div class="-mt-10 mb-12 text-center">
-  <a href="https://190da48a9d7f2b9145.gradio.live/" target="_blank" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xl font-bold rounded-lg shadow-lg hover:from-blue-700 hover:to-purple-700 hover:text-white transform hover:scale-105 transition-all duration-200 border-2 border-transparent hover:border-white">
-    🚀 Try Our Live Demo
-  </a>
-</div>
-
-<div class="text-center text-gray-600">
+<div class="text-center -mt-20 text-gray-600">
   Jump to: [TL;DR](#tldr), [Introduction](#introduction), [Method](#method), [Key Insights](#key-insights), [Conclusion](#conclusion), [Acknowledgements](#acknowledgements), [Related Links](#related-links), [Cite](#bibtex)
 </div>
 
@@ -87,6 +81,7 @@ license_url: "https://creativecommons.org/licenses/by-sa/4.0/"
 
 ## TL;DR {#tldr}
 We boost performance on the ARC reasoning benchmark by using the same LLM in two ways: (1) generating diverse solutions with depth-first search and (2) combine the same model' scores of solutions from different perspectives using an "[Product of Expert (Hinton, 1999)](https://www.cs.toronto.edu/~fritz/absps/icann-99.html)" approach. Our method solves 71.6% of tasks at very low cost (~2ct/task).
+
 
 <div class="mt-10">
 ![High-Level Overview of our Approach: We use a single LLM to generate multiple candidate solutions and utilize multiple perspectives to improve the uncertainty of choosing which solution is best.](images/ARC_Example.png)  
